@@ -20,7 +20,7 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.columnas = ["NombreCompleto", "Nombre", "Apellido", "FechaNacimiento", "Email", "Curso", "Activo"];
-    if (localStorage.getItem('admin')) {
+    if (!!localStorage.getItem('admin')) {
       this.columnas.push("Actions")
     }
   }
