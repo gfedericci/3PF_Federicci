@@ -8,16 +8,25 @@ describe('TableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableComponent ]
+      declarations: [TableComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Usuario: ADMIN', () => {
+    localStorage.setItem('admin', 'admin');
+    component.ngOnInit();
+    expect(!!component.columnas.find(col => col == 'Actions')).toBeTruthy();
+
+  });
+
+  it('Usuario: COMÚN', () => {
+    localStorage.removeItem('admin');
+    component.ngOnInit();
+    expect(!!component.columnas.find(col => col == 'Actions')).toBeFalsy();
   });
 });

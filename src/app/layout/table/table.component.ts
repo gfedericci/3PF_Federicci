@@ -10,7 +10,7 @@ import { AlumnosService } from '../../services/alumnos.service';
 })
 export class TableComponent implements OnInit {
 
-  columnas = ["NombreCompleto", "Nombre", "Apellido", "FechaNacimiento", "Email", "Curso", "Activo", "Actions"];
+  columnas = ["NombreCompleto", "Nombre", "Apellido", "FechaNacimiento", "Email", "Curso", "Activo"];
 
   @ViewChild(MatTable)
   table!: MatTable<Alumno>;
@@ -19,6 +19,10 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.columnas = ["NombreCompleto", "Nombre", "Apellido", "FechaNacimiento", "Email", "Curso", "Activo"];
+    if (localStorage.getItem('admin')) {
+      this.columnas.push("Actions")
+    }
   }
 
   eliminar(index: number) {

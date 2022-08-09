@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
       this.wrongUser = false;
       switch (userType) {
         case 'invalid': this.wrongUser = true; break;
-        // case 'admin': break;
-        // case 'user': break;
       }
       if (!this.wrongUser) {
         var message = 'Ingreso exitoso';

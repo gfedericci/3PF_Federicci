@@ -10,7 +10,7 @@ import { CursosService } from '../../services/cursos.service';
 })
 export class TableCursosComponent implements OnInit {
 
-  columnas = [ "Nombre", "Actions" ];
+  columnas = ["Nombre"];
 
   @ViewChild(MatTable)
   table!: MatTable<Curso>;
@@ -19,6 +19,10 @@ export class TableCursosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.columnas = ["Nombre"];
+    if (localStorage.getItem('admin')) {
+      this.columnas.push("Actions")
+    }
   }
 
   eliminar(index: number) {
