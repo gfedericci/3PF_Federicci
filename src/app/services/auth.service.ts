@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private router: Router) { }
 
   logIn(user: string, pass: string): string {
-    if (!!user && !!pass) {
+    if (pass == '1234') {
       localStorage.setItem('token', Math.random().toString(36).substring(2));
       
       if (user.toLowerCase() == 'admin') {

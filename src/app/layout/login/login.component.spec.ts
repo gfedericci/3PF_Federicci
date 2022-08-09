@@ -1,15 +1,36 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { LoginComponent } from './login.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let authS: AuthService;
   let routerSpy = {navigate: jasmine.createSpy('navigate')};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
+      declarations: [ LoginComponent ],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: '/alumnos/listadoAlumnos'}]),
+        OverlayModule,
+        BrowserAnimationsModule,
+        SharedModule
+      ],
+      providers: [
+        FormBuilder,
+        MatSnackBar,
+        AuthService,
+        { provide: Router, useValue: routerSpy }
+      ],
     })
     .compileComponents();
 
@@ -40,8 +61,6 @@ describe('LoginComponent', () => {
     component.submit();
     expect(component.submited).toBeTruthy();
     expect(!component.wrongUser).toBeTruthy();
-    expect(!!localStorage.getItem('admin')).toBeFalsy();
-
   });
 
   it('usuario ADMIN', () => {
